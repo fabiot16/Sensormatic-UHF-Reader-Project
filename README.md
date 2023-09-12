@@ -70,11 +70,11 @@ This RFID UHF reader project is designed to read RFID tags within a specified ra
   - After connection is made
     - If enabled, it will try to update OTA and then start just like in the video
    
-    https://github.com/fabiot16/Sensormatic-UHF-Reader-Project/assets/114235594/fe107b2c-0eca-439d-9258-b80941f4fdc2
+    https://github.com/fabiot16/Sensormatic-UHF-Reader-Project/assets/114235594/b0b616d7-ea5d-4fa6-a7ff-aaedc6f76064
 
     - API Receiving
     
-    https://github.com/fabiot16/Sensormatic-UHF-Reader-Project/assets/114235594/1fdb9688-3bd9-4525-a608-f6fbee3e8c45
+    https://github.com/fabiot16/Sensormatic-UHF-Reader-Project/assets/114235594/be996d8c-62bd-4874-99c7-1e6f7c176721
 
   If you want to update any setting while it is running, you can just press the button and it will set up the config portal and AP once again.
 
