@@ -1,0 +1,4 @@
+ip=192.168.222.173
+transmit_power=10
+debounce_interval=20
+clear_interval=40

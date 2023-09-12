@@ -1,0 +1,3 @@
+endpoint=https://sea.stg.cloud.sensormatic.com/v2/pos/transaction
+debounce_interval=10
+clear_interval=20

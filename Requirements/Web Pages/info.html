@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang='en'>
+    <head>
+        <meta name='format-detection' content='telephone=no'>
+        <meta charset='UTF-8'>
+        <meta  name='viewport' content='width=device-width,initial-scale=1,user-scalable=no'/>
+        <title>
+            Info
+        </title>
+        <script>
+            function c(l){
+                document.getElementById('s').value=l.getAttribute('data-ssid')||l.innerText||l.textContent;
+                p = l.nextElementSibling.classList.contains('l');
+                document.getElementById('p').disabled = !p;
+                if(p)document.getElementById('p').focus();
+            };
+            function f() {
+                var x = document.getElementById('p');
+                x.type==='password'?x.type='text':x.type='password';
+            }
+        </script>
+        <style>
+            .c,body{text-align:center;font-family:verdana}
+            div,input,select{padding:5px;font-size:1em;margin:5px 0;box-sizing:border-box}
+            input,button,select,.msg{border-radius:.3rem;width: 100%}
+            input[type=radio],input[type=checkbox]{width:auto}
+            button,input[type='button'],input[type='submit']{cursor:pointer;border:0;background-color:#1fa3ec;color:#fff;line-height:2.4rem;font-size:1.2rem;width:100%}
+            input[type='file']{border:1px solid #1fa3ec}
+            .wrap {text-align:left;display:inline-block;min-width:260px;max-width:500px}
+            a{color:#000;font-weight:700;text-decoration:none}
+            a:hover{color:#1fa3ec;text-decoration:underline}
+            .q{height:16px;margin:0;padding:0 5px;text-align:right;min-width:38px;float:right}
+            .q.q-0:after{background-position-x:0}
+            .q.q-1:after{background-position-x:-16px}
+            .q.q-2:after{background-position-x:-32px}
+            .q.q-3:after{background-position-x:-48px}
+            .q.q-4:after{background-position-x:-64px}
+            .q.l:before{background-position-x:-80px;padding-right:5px}
+            .ql .q{float:left}
+            .q:after,.q:before{content:'';width:16px;height:16px;display:inline-block;background-repeat:no-repeat;background-position: 16px 0;background-image:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAAAQCAMAAADeZIrLAAAAJFBMVEX///8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADHJj5lAAAAC3RSTlMAIjN3iJmqu8zd7vF8pzcAAABsSURBVHja7Y1BCsAwCASNSVo3/v+/BUEiXnIoXkoX5jAQMxTHzK9cVSnvDxwD8bFx8PhZ9q8FmghXBhqA1faxk92PsxvRc2CCCFdhQCbRkLoAQ3q/wWUBqG35ZxtVzW4Ed6LngPyBU2CobdIDQ5oPWI5nCUwAAAAASUVORK5CYII=');}
+            @media (-webkit-min-device-pixel-ratio: 2),(min-resolution: 192dpi){.q:before,.q:after {background-image:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALwAAAAgCAMAAACfM+KhAAAALVBMVEX///8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADAOrOgAAAADnRSTlMAESIzRGZ3iJmqu8zd7gKjCLQAAACmSURBVHgB7dDBCoMwEEXRmKlVY3L//3NLhyzqIqSUggy8uxnhCR5Mo8xLt+14aZ7wwgsvvPA/ofv9+44334UXXngvb6XsFhO/VoC2RsSv9J7x8BnYLW+AjT56ud/uePMdb7IP8Bsc/e7h8Cfk912ghsNXWPpDC4hvN+D1560A1QPORyh84VKLjjdvfPFm++i9EWq0348XXnjhhT+4dIbCW+WjZim9AKk4UZMnnCEuAAAAAElFTkSuQmCC');background-size: 95px 16px;}}
+            .msg{padding:20px;margin:20px 0;border:1px solid #eee;border-left-width:5px;border-left-color:#777}
+            .msg h4{margin-top:0;margin-bottom:5px}
+            .msg.P{border-left-color:#1fa3ec}
+            .msg.P h4{color:#1fa3ec}
+            .msg.D{border-left-color:#dc3630}
+            .msg.D h4{color:#dc3630}
+            .msg.S{border-left-color: #5cb85c}
+            .msg.S h4{color: #5cb85c}dt{font-weight:bold}dd{margin:0;padding:0 0 0.5em 0;min-height:12px}td{vertical-align: top;}
+            .h{display:none}
+            button{transition: 0s opacity;transition-delay: 3s;transition-duration: 0s;cursor: pointer}
+            button.D{background-color:#dc3630}
+            button:active{opacity:50% !important;cursor:wait;transition-delay: 0s}
+            body.invert,
+            body.invert a,
+            body.invert h1 {background-color:#060606;color:#fff;}
+            body.invert .msg{color:#fff;background-color:#282828;border-top:1px solid #555;border-right:1px solid #555;border-bottom:1px solid #555;}
+            body.invert .q[role=img]{-webkit-filter:invert(1);filter:invert(1);}
+            :disabled {opacity: 0.5;}
+        </style>
+    </head>
+    <body class='invert'>
+        <div class='wrap'>
+            <div class='msg'>No AP set</div>
+            <h3>esp32</h3>
+                
+            <hr>
+                
+            <dl>
+                <dt>Uptime</dt><dd>4 mins 11 secs</dd>
+                <dt>Chip ID</dt><dd>f515b80c</dd>
+                <dt>Chip rev</dt><dd>1</dd>
+                <dt>Flash size</dt><dd>{flash_size} bytes</dd>
+                <dt>PSRAM Size</dt><dd>4192107 bytes</dd>
+                <dt>CPU frequency</dt><dd>{int(freq/1000000)} MHz</dd>
+                <dt>Memory - Free heap</dt><dd>189416 bytes available</dd>
+                <dt>Memory - Sketch size</dt><dd>Used / Total bytes<br/>1032192 / 2342912<br/>
+                    <progress value='1032192' max='2342912'></progress>
+                </dd>
+                <dt>Temperature</dt><dd>{tempc} C&deg; / {temp} F&deg;</dd>
+                    
+                <br/>
+                    
+                <h3>
+                    WiFi
+                </h3>
+                    
+                <hr>
+                    
+                <dt>Connected</dt><dd>{connected}</dd>
+                <dt>Station SSID</dt><dd>{ssid}</dd>
+                <dt>Station IP</dt><dd>{sta_ip}</dd>
+                <dt>Station gateway</dt><dd>{sta_gate}</dd>
+                <dt>Station subnet</dt><dd>{sta_sub}</dd>
+                <dt>DNS Server</dt><dd>{sta_dns}</dd>
+                <dt>Hostname</dt><dd>{hostname}</dd>
+                <dt>Station MAC</dt><dd>{mac}</dd>
+                <dt>Access point IP</dt><dd>{ap_ip}</dd>
+                <dt>Access point MAC</dt><dd>{ap_mac}</dd>
+                <dt>Access point hostname</dt><dd>espressif</dd>
+                <dt>BSSID</dt><dd>
+                </dd>
+            </dl>
+            <h3>About</h3>
+            
+            <hr>
+                
+            <dl>
+                <dt>WiFiManager</dt><dd>v2.0.15-rc.1</dd>
+                <dt>Micropython</dt><dd>1.20.0</dd>
+                <dt>Build date</dt><dd>Jul 20 2023 15:09:13</dd>
+            </dl>
+                
+            <hr>
+                
+            <br/>
+            <br/>
+                
+            <form action='erase' method='get'>
+                <button class='D'>Erase WiFi config</button>
+            </form>
+                
+            <br/>
+                
+            <form action='index' method='POST'>
+                <button name='go back' value='1'>Go Back</button>
+            </form>
+            
+            <br/>
+                
+            <h3>Available pages</h3>
+                
+            <hr>
+                
+            <table class='table'>
+                <thead>
+                    <tr>
+                        <th>Page</th>
+                        <th>Function</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><a href='/'>/</a></td>
+                        <td>Menu page.</td>
+                    </tr>
+                    <tr>
+                        <td><a href='/wifi'>/wifi</a></td>
+                        <td>Show WiFi scan results and enter WiFi configuration.(/0wifi noscan)</td>
+                    </tr>
+                    <tr>
+                        <td><a href='/wifisave'>/wifisave</a></td>
+                        <td>Save WiFi configuration information and configure device. Needs variables supplied.</td>
+                    </tr>
+                    <tr>
+                        <td><a href='/param'>/param</a></td>
+                        <td>Parameter page</td>
+                    </tr>
+                    <tr>
+                        <td><a href='/info'>/info</a></td>
+                        <td>Information page</td>
+                    </tr>
+                    <tr>
+                        <td><a href='/u'>/u</a></td>
+                        <td>OTA Update</td>
+                    </tr>
+                    <tr>
+                        <td><a href='/close'>/close</a></td>
+                        <td>Close the captiveportal popup, config portal will remain active</td>
+                    </tr>
+                    <tr>
+                        <td>/exit</td>
+                        <td>Exit Config portal, config portal will close</td>
+                    </tr>
+                    <tr>
+                        <td>/restart</td>
+                        <td>Reboot the device</td>
+                    </tr>
+                    <tr>
+                        <td>/erase</td>
+                        <td>Erase WiFi configuration and reboot device. Device will not reconnect to a network until new WiFi configuration data is entered.</td>
+                    </tr>
+                </table>
+            <p/>Github <a href='https://github.com/tzapu/WiFiManager'>https://github.com/tzapu/WiFiManager</a>.
+        </div>
+    </body>
+</html>
