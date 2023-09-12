@@ -110,7 +110,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Acknowledgments
 
-Mention any individuals, organizations, or libraries that you want to acknowledge for their contributions or support.
+  I would like to thank to Sensormatic and [@lasoares](https://github.com/lasoares) for providing me with the hardware, guidance and the opportunity to learn and grow as a software developer during this internship.
 
 ## License
 
