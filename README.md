@@ -42,11 +42,15 @@ This RFID UHF reader project is designed to read RFID tags within a specified ra
 - Create and configure your own OTA Updater as discribed in [rdehuyss's Micropython OTA Updater](https://github.com/rdehuyss/micropython-ota-updater) or simply disable it by commenting connectToWifiAndUpdate().
 - Open PyMakr's tab on Visual Studio
 - On devices, click the lightning to connect, folder to open the board's explorer end terminal to start a terminal
+
 ![clicks](https://github.com/fabiot16/Sensormatic-UHF-Reader-Project/blob/main/images/clicks.jpg)
+
 - In config.py declare the API variables
 - Copy 'app' folder and main.py to the board
 - CTRL+D To soft reboot and run the code (Sometimes the board bugs and it is needed to press the reset button (Number 9) shown in the image)
+
 ![reset](https://github.com/fabiot16/Sensormatic-UHF-Reader-Project/blob/main/images/reset.jpg)
+
 - If there is not a confirmation that the connection was successfull after 10 seconds, press the reset button.
 > [!WARNING]
 > Everytime you press the reset button, there is a need to reconnect the board on PyMakr
