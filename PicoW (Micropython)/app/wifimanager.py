@@ -1,6 +1,6 @@
 # https://pypi.org/project/micro-wifi-manager/#description
 import network, os, socket, ure, time, errno
-from machine import SPI, Pin, freq
+from machine import SPI, Pin, freq, reset
 import st7789
 import vga1_16x32 as font
 import vga1_8x16 as fontS
@@ -133,6 +133,7 @@ class WifiManager:
                     self.stop()
                     wlan_ap.active(False)
                     client.close()
+                    reset()
                     return changed_config
                 else:
                     if not config:
@@ -218,21 +219,19 @@ def write_profiles(profiles): #Saves WiFis
         f.write(''.join(lines))
 
 def do_connect(ssid, password): #Tries connection
-    if wlan_sta.isconnected():
-        return None
     print('Trying to connect to %s...' % ssid)
     wlan_sta.connect(ssid, password)
     for retry in range(100):
         connected = wlan_sta.isconnected()
         if connected:
-            break
+            return True
         print(retry)
         time.sleep(0.1)
     if connected:
         print('\nConnected. Network config: ', wlan_sta.ifconfig())
     else:
         print('\nFailed. Not Connected to: ' + ssid)
-    return connected
+    return False
 
 def send_header(client, status_code=200, content_length=None ):
     client.sendall("HTTP/1.0 {} OK\r\n".format(status_code))
@@ -320,6 +319,7 @@ def handle_wifisave(client, request): #Saved WiFi page
         password = match.group(2).replace("%3F", "?").replace("%21", "!")
 
     if do_connect(ssid, password):
+        time.sleep(2)
         send_header(client)
         client.sendall(f"""\
             {html_head}<body class='invert'><div class='wrap'><div class='msg'>Saving Credentials<br/>ESP Successfully Connected to Network</div><break/><form action='index' method='POST'><button name='go back' value='1'>Go Back</button></form><br/><form action='exit' method='post'><button class='D'>Exit</button></form><br/></div></body></html>        
@@ -333,6 +333,7 @@ def handle_wifisave(client, request): #Saved WiFi page
 
         time.sleep(2)
     else:
+        time.sleep(2)
         send_header(client)
         client.sendall(f"""\
             {html_head}<body class='invert'><div class='wrap'><div class='msg'>Failed to Connect ESP to Network</div><form action="wifi" method="post"><button>Try Again</button></form></div></body></html>
