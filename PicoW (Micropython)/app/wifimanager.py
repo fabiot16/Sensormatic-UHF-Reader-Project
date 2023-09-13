@@ -317,17 +317,18 @@ def handle_wifisave(client, request): #Saved WiFi page
     
     send_header(client)
     if do_connect(ssid, password):
-        time.sleep(2)
-        client.sendall(f"""\
-            {html_head}<body class='invert'><div class='wrap'><div class='msg'>Saving Credentials<br/>ESP Successfully Connected to Network</div><break/><form action='exit' method='post'><button class='D'>Exit</button></form><br/></div></body></html>        
-        """)
+        # time.sleep(2)
+        # client.sendall(f"""\
+        #     {html_head}<body class='invert'><div class='wrap'><div class='msg'>Saving Credentials<br/>ESP Successfully Connected to Network</div><break/><form action='exit' method='post'><button class='D'>Exit</button></form><br/></div></body></html>        
+        # """)
         try:
             profiles = read_profiles()
         except OSError:
             profiles = {}
         profiles[ssid] = password
         write_profiles(profiles)
-
+        
+        reset()
         time.sleep(2)
     else:
         time.sleep(2)
