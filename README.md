@@ -111,13 +111,16 @@ This RFID UHF reader project is designed to read RFID tags within a specified ra
 
   ![config](https://github.com/fabiot16/Sensormatic-UHF-Reader-Project/blob/main/images/config.jpg)
 
-
 ### LLRP
   - Connect the reader to the network
   - Run main.py
 
 ### ESP32
   - Not finished and not tested
+
+## Demo
+  
+  https://github.com/fabiot16/Sensormatic-UHF-Reader-Project/assets/114235594/3267a211-2700-4701-b6fd-79b52c281e62
 
 ## License
 
