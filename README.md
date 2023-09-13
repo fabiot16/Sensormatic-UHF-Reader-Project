@@ -37,21 +37,29 @@ This RFID UHF reader project is designed to read RFID tags within a specified ra
 ## Software Setup
 
 ### PicoW
-- Install Visual Studio Code and PyMakr extension
-- Install the firmware on the board as described in [SB Components UHF Reader](https://github.com/sbcshop/UHF_Reader_Pico_W_Software) (Comes pre-installed).
-- Create and configure your own OTA Updater as discribed in [rdehuyss's Micropython OTA Updater](https://github.com/rdehuyss/micropython-ota-updater) or simply disable it by commenting connectToWifiAndUpdate().
-- Open PyMakr's tab on Visual Studio
-- On devices, click the lightning to connect, folder to open the board's explorer end terminal to start a terminal
+  - For Visual Studio
+    - Install Visual Studio Code and PyMakr extension
+    - Firmware comes pre-installed, but if needed, do it as described in [SB Components UHF Reader](https://github.com/sbcshop/UHF_Reader_Pico_W_Software).
+    - Create and configure your own OTA Updater as discribed in [rdehuyss's Micropython OTA Updater](https://github.com/rdehuyss/micropython-ota-updater) or simply disable it by commenting connectToWifiAndUpdate().
+    - Open PyMakr's tab on Visual Studio
+    - On devices, click the lightning to connect, folder to open the board's explorer end terminal to start a terminal
+    
+    ![clicks](https://github.com/fabiot16/Sensormatic-UHF-Reader-Project/blob/main/images/clicks.jpg)
+    
+    - In config.py declare the API variables
+    - Copy 'app' folder and main.py to the board
+    - CTRL+D To soft reboot and run the code (Sometimes the board bugs and it is needed to press the reset button (Number 9) shown in the image)
+    
+    ![reset](https://github.com/fabiot16/Sensormatic-UHF-Reader-Project/blob/main/images/reset.jpg)
 
-![clicks](https://github.com/fabiot16/Sensormatic-UHF-Reader-Project/blob/main/images/clicks.jpg)
-
-- In config.py declare the API variables
-- Copy 'app' folder and main.py to the board
-- CTRL+D To soft reboot and run the code (Sometimes the board bugs and it is needed to press the reset button (Number 9) shown in the image)
-
-![reset](https://github.com/fabiot16/Sensormatic-UHF-Reader-Project/blob/main/images/reset.jpg)
+  - For Thonny
+    - Open Thonny and configure the connection by clicking on the bottom right corner
+    - Open the files you want to import with Thonny and edit them as you wish
+    - To import them to the board, on File, presse Save as, an choose Pico W
+    - You can also run the program directly on Thonny with the board connected
 
 - If there is not a confirmation that the connection was successfull after 10 seconds, press the reset button.
+
 > [!WARNING]
 > Everytime you press the reset button, there is a need to reconnect the board on PyMakr
 
