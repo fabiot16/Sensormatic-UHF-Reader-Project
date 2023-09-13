@@ -87,6 +87,12 @@ class Display:
         self.clear()
         self.displayText(text = 'Place Tag', font = fontL, x = 48, y = 51, color = GREEN)
 
+    def displayDisconnected(self):
+        self.clear()
+        self.displayText(text = 'Lost Connection', font = fontL, x = 0, y = 30, color = RED)
+        self.displayText(text = 'Please Reset...', font = fontL, x = 0, y = 72, color = RED)
+
+
     def displayText(self, text = '', font = fontM, x = 0, y = 0, color = WHITE):
         self.tft.text(font, text, x, y, color)
             

@@ -64,7 +64,7 @@ class Session():
         self.table = {} # Table initialization
 
         self.uhf.multiple_read() # Start reading
-
+        
     def read_configs(self): #Read configuration from file
         file = open('app/config.txt', 'r')
         read = []
@@ -111,10 +111,6 @@ class Session():
         if self.tokens:
             self.renewToken()
             
-            if (time() - self.time_passed) > 5:
-                self.display.displayPlaceTag()
-                self.time_passed = time()
-            
             frame = self.uhf.read_mul() #Read EPC
             if frame:
                 epc = "".join(frame[8:20])
@@ -128,6 +124,7 @@ class Session():
                     table[epc] = [current_time, current_time]
                     print('-----New EPC-----', epc)
                     self.send(epc)
+                    self.display.displayPlaceTag()
                 
                 else: #If not new
                     last_seen, last_sent = table[epc]
@@ -137,6 +134,7 @@ class Session():
                         self.beep()
                         last_sent = current_time
                         self.send(epc)
+                        self.display.displayPlaceTag()
                         print('-----Resent-----', epc)
                         
                     last_seen = current_time

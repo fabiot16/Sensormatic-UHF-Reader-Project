@@ -56,5 +56,5 @@ def connectToWifiAndUpdate():
 def startApp():
     import app.run
 
-connectToWifiAndUpdate()
+#connectToWifiAndUpdate()
 startApp()
