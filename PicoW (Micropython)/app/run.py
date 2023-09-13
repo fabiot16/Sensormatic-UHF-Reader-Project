@@ -4,6 +4,7 @@ from app.session import Session
 from app.config import button2
 from time import sleep
 from gc import collect
+import sys
 import network
 #-----------------------------------------------------------------------------------------#
 
@@ -20,15 +21,18 @@ wlan_sta = network.WLAN(network.STA_IF)
 
 #Cycle
 while True:
-    if not wlan_sta.isconnected():
-        session.display.displyDisconnected()
-        import sys
-        sys.exit()
-    if not button2.value(): #Button pressed enter config mode
-        session.display.displayConfig()
-        if WifiManager().start(config = 1):
-            session.update_session()
-            session.display.displayUpdated()
+    try:
+        if not wlan_sta.isconnected():
+            session.display.displyDisconnected()
+            sys.exit()
+        if not button2.value(): #Button pressed enter config mode
+            session.display.displayConfig()
+            if WifiManager().start(config = 1):
+                session.update_session()
+                session.display.displayUpdated()
 
-    session.process_epcs() #Process readings
-    collect()
+        session.process_epcs() #Process readings
+        collect()
+    except:
+        session.display.displayError()
+        sys.exit()
