@@ -54,9 +54,19 @@ This RFID UHF reader project is designed to read RFID tags within a specified ra
 
   - For Thonny
     - Open Thonny and configure the connection by clicking on the bottom right corner
+   
+    ![thonny](https://github.com/fabiot16/Sensormatic-UHF-Reader-Project/blob/main/images/thonny.jpg)
+
+    ![connect](https://github.com/fabiot16/Sensormatic-UHF-Reader-Project/blob/main/images/connect.jpg)
+    
     - Open the files you want to import with Thonny and edit them as you wish
     - To import them to the board, on File, presse Save as, an choose Pico W
+   
+    ![save](https://github.com/fabiot16/Sensormatic-UHF-Reader-Project/blob/main/images/save.jpg)
+      
     - You can also run the program directly on Thonny with the board connected
+   
+    ![run](https://github.com/fabiot16/Sensormatic-UHF-Reader-Project/blob/main/images/run.jpg)
 
 - If there is not a confirmation that the connection was successfull after 10 seconds, press the reset button.
 
