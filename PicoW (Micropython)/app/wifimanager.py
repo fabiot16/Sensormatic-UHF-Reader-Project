@@ -123,7 +123,7 @@ class WifiManager:
                 elif url == 'info':
                     handle_info(client)
                 elif url == 'update':
-                    handle_update(client)
+                    handle_update(client, config)
                 elif url == 'updated':
                     updated(client, request)
                 elif url == 'erase':
@@ -136,10 +136,7 @@ class WifiManager:
                     reset()
                     return changed_config
                 else:
-                    if not config:
-                        handle_root(client)
-                    else:
-                        handle_root(client, config = 1)
+                    handle_root(client, config)
 
             finally:
                 client.close()
@@ -247,7 +244,7 @@ def send_response(client, payload, status_code=200):
         client.sendall(payload)
     client.close()
 
-def handle_root(client, config = 0): #Root page
+def handle_root(client, config): #Root page
     try:
         set_ap = list(read_profiles().keys())
         if not set_ap:
@@ -258,7 +255,7 @@ def handle_root(client, config = 0): #Root page
         send_header(client)
         if not config:
             client.sendall(f"""\
-                {html_head}<body class='invert'><div class='wrap'><h1>WiFiManager</h1></br></br><form action="wifi" method="post"><button>Configure WiFi</button></form><br/><form action='update'  method='get'><button>Configure RFID</button></form><br/><form action='info' method='post'><button>WiFi Info</button></form><br/><form action='exit' method='post'><button class='D'>Exit</button></form><br/><div class='msg'>{set_ap}</div></div></body></html>
+                {html_head}<body class='invert'><div class='wrap'><h1>WiFiManager</h1></br></br><form action="update" method="post"><button>Configure</button></form><br/><form action='info' method='post'><button>WiFi Info</button></form><br/><form action='exit' method='post'><button class='D'>Exit</button></form><br/><div class='msg'>{set_ap}</div></div></body></html>
             """)     
         else:
             client.sendall(f"""\
@@ -317,12 +314,12 @@ def handle_wifisave(client, request): #Saved WiFi page
     except Exception:
         ssid = match.group(1).replace("%3F", "?").replace("%21", "!").replace("+", " ")
         password = match.group(2).replace("%3F", "?").replace("%21", "!")
-
+    
+    send_header(client)
     if do_connect(ssid, password):
         time.sleep(2)
-        send_header(client)
         client.sendall(f"""\
-            {html_head}<body class='invert'><div class='wrap'><div class='msg'>Saving Credentials<br/>ESP Successfully Connected to Network</div><break/><form action='index' method='POST'><button name='go back' value='1'>Go Back</button></form><br/><form action='exit' method='post'><button class='D'>Exit</button></form><br/></div></body></html>        
+            {html_head}<body class='invert'><div class='wrap'><div class='msg'>Saving Credentials<br/>ESP Successfully Connected to Network</div><break/><form action='exit' method='post'><button class='D'>Exit</button></form><br/></div></body></html>        
         """)
         try:
             profiles = read_profiles()
@@ -334,7 +331,6 @@ def handle_wifisave(client, request): #Saved WiFi page
         time.sleep(2)
     else:
         time.sleep(2)
-        send_header(client)
         client.sendall(f"""\
             {html_head}<body class='invert'><div class='wrap'><div class='msg'>Failed to Connect ESP to Network</div><form action="wifi" method="post"><button>Try Again</button></form></div></body></html>
         """)
@@ -364,7 +360,7 @@ def handle_info(client): #Info page
         else:
             raise
 
-def handle_update(client): #Update page
+def handle_update(client, config): #Update page
     try:
         send_header(client)
         set_ap = list(read_profiles().keys())
@@ -372,8 +368,14 @@ def handle_update(client): #Update page
             set_ap = 'No AP Set'   
         else:
             set_ap = set_ap[0]
-        client.sendall(f"""\
+        
+        if config:
+            client.sendall(f"""\
             {html_head}<body class='invert'><div class='wrap'><h1>RFID Reader Configuration</h1></br><form method='POST' action='updated'><label for='send'>Send Timer</label><input id='send' name='send' maxlength='32' autocorrect='off' autocapitalize='none' placeholder=''><br/><br/><label for='clear'>Clear Timer</label><input id='clear' name='clear' maxlength='32' autocorrect='off' autocapitalize='none' placeholder=''><br/><br/><button type='submit'>Save</button></form><br/><form action='index' method='POST'><button name='go back' value='1'>Go Back</button></form><br/><div class='msg'>{set_ap}</div></div></body></html>
+            """)
+        else:
+            client.sendall(f"""\
+            {html_head}<body class='invert'><div class='wrap'><h1>RFID Reader Configuration</h1></br><form method='POST' action='wifi'><label for='send'>Send Timer</label><input id='send' name='send' maxlength='32' autocorrect='off' autocapitalize='none' placeholder=''><br/><br/><label for='clear'>Clear Timer</label><input id='clear' name='clear' maxlength='32' autocorrect='off' autocapitalize='none' placeholder=''><br/><br/><button type='submit'>Save</button></form><br/><form action='index' method='POST'><button name='go back' value='1'>Go Back</button></form><br/><div class='msg'>{set_ap}</div></div></body></html>
             """)
         
     except Exception as e:
