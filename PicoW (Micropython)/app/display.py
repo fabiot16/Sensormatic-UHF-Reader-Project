@@ -92,6 +92,11 @@ class Display:
         self.displayText(text = 'Lost Connection', font = fontL, x = 0, y = 30, color = RED)
         self.displayText(text = 'Please Reset...', font = fontL, x = 0, y = 72, color = RED)
 
+    def displayError(self):
+        self.clear()
+        self.displayText(text = 'Error Ocurred', font = fontL, x = 16, y = 30, color = RED)
+        self.displayText(text = 'Please Reset...', font = fontL, x = 0, y = 72, color = RED)
+
 
     def displayText(self, text = '', font = fontM, x = 0, y = 0, color = WHITE):
         self.tft.text(font, text, x, y, color)

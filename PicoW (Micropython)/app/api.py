@@ -87,6 +87,6 @@ def postPosTransaction(access_token,epc):
 
 def handlePosApiResponse(response):
     if response.status_code == 204 or response.status_code == 200 :
-        print('The EPC was submitted with success!')
+        print('The EPC was submitted with success!\n')
     else:
-        print('Pos Transaction API Request failed: '+response.text)
+        print('Pos Transaction API Request failed: '+response.text+'\n')

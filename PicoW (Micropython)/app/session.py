@@ -62,7 +62,7 @@ class Session():
         #-----------------------------------------------------------------------------------------#
 
         self.table = {} # Table initialization
-
+        self.start_read_timmer = time()
         self.uhf.multiple_read() # Start reading
         
     def read_configs(self): #Read configuration from file
@@ -111,6 +111,12 @@ class Session():
         if self.tokens:
             self.renewToken()
             
+            if (time() - self.start_read_timmer) > 200:
+                self.uhf.stop_read()
+                sleep(0.5)
+                self.uhf.multiple_read()
+                self.start_read_timmer = time()
+            
             frame = self.uhf.read_mul() #Read EPC
             if frame:
                 epc = "".join(frame[8:20])
@@ -122,7 +128,7 @@ class Session():
                     self.display.displayEPC(epc)
                     self.beep()
                     table[epc] = [current_time, current_time]
-                    print('-----New EPC-----', epc)
+                    print('\n-----New EPC-----', epc)
                     self.send(epc)
                     self.display.displayPlaceTag()
                 
@@ -135,7 +141,7 @@ class Session():
                         last_sent = current_time
                         self.send(epc)
                         self.display.displayPlaceTag()
-                        print('-----Resent-----', epc)
+                        print('\n-----Resent-----', epc)
                         
                     last_seen = current_time
                     self.table[epc] = [last_seen, last_sent]
@@ -156,7 +162,7 @@ class Session():
     
         current_time = time()
         expired_tags = []
-        print("{:<10} {:<10} {:<10}".format('EPC', '              LAST SEEN', '        LAST SENT'))
+        print("{:<10} {:<10} {:<10}".format('EPC', '                 LAST SEEN', ' || LAST SENT'))
 
         for key, values in self.table.items():
             last_seen, last_sent = values
@@ -166,8 +172,8 @@ class Session():
                 print('------- DELETED: ', key)
                 continue
                 
-            print("{:x<7s} {:x<7f} {:x<7f}".format(key, last_seen, last_sent))
-            
+            print(key, '->', last_seen, '||', last_sent, '\n')
+
         for expired in expired_tags: del self.table[expired]
 
     def beep(self): #Buzzes
