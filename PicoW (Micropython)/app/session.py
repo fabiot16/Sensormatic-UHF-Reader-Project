@@ -99,19 +99,19 @@ class Session():
             self.tokens = new_tokens
             self.access_token = access_token
 
-    def receive_epcs(self): #Meant for esp32 multithreading
-        start = time()
-        while start + self.request_interval > time():
-            frame = self.uhf.read_mul()
-            if frame:
-                epc = "".join(frame[8:20])
-        self.process_epcs()
+    # def receive_epcs(self): #Meant for esp32 multithreading
+    #     start = time()
+    #     while start + self.request_interval > time():
+    #         frame = self.uhf.read_mul()
+    #         if frame:
+    #             epc = "".join(frame[8:20])
+    #     self.process_epcs()
 
     def process_epcs(self):
         if self.tokens:
             self.renewToken()
             
-            if (time() - self.start_read_timmer) > 200:
+            if (time() - self.start_read_timmer) > 200: #Resent UHF Read command (limited to 10k poolings)
                 self.uhf.stop_read()
                 sleep(0.5)
                 self.uhf.multiple_read()
@@ -145,7 +145,8 @@ class Session():
                         
                     last_seen = current_time
                     self.table[epc] = [last_seen, last_sent]
-            if (time() - self.time_passed) > 1:
+            
+            if (time() - self.time_passed) > 1: #Every second: Print info and manage expired epcs
                 self.time_passed = time()
                 self.expiredAndInfo()
         else:

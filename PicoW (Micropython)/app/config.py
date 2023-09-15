@@ -1,10 +1,8 @@
-# Configuration File
-
 from machine import Pin, PWM
 
-uhf_enable = Pin(26, Pin.OUT)
-button2 = Pin(10, Pin.IN, Pin.PULL_UP)
-buzzer = PWM(Pin(22)) #define PWM output pin GP22
+uhf_enable = Pin(26, Pin.OUT) #Reader enable pin
+button2 = Pin(10, Pin.IN, Pin.PULL_UP) #Button2
+buzzer = PWM(Pin(22)) #Sound
 
 api_config_stg = {
     'username':'esp32-staging-pos',

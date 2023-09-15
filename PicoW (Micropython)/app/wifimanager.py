@@ -253,6 +253,7 @@ def handle_root(client, config): #Root page
             set_ap = set_ap[0]
         wlan_sta.active(True)
         send_header(client)
+        
         if not config:
             client.sendall(f"""\
                 {html_head}<body class='invert'><div class='wrap'><h1>WiFiManager</h1></br></br><form action="update" method="post"><button>Configure</button></form><br/><form action='info' method='post'><button>WiFi Info</button></form><br/><form action='exit' method='post'><button class='D'>Exit</button></form><br/><div class='msg'>{set_ap}</div></div></body></html>

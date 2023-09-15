@@ -8,7 +8,6 @@ import sys
 import network
 #-----------------------------------------------------------------------------------------#
 
-
 #Initialize session
 session = Session()
 session.update_session() #Updates values from config.txt
@@ -25,14 +24,17 @@ while True:
         if not wlan_sta.isconnected():
             session.display.displyDisconnected()
             sys.exit()
+        
         if not button2.value(): #Button pressed enter config mode
             session.display.displayConfig()
+            
             if WifiManager().start(config = 1):
                 session.update_session()
                 session.display.displayUpdated()
 
         session.process_epcs() #Process readings
         collect()
+   
     except:
         session.display.displayError()
         sys.exit()
